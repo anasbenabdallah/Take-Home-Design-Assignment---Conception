@@ -131,7 +131,7 @@ export default function HuggingFaceImageGenerator() {
             <div className="placeholder-wrapper">
               <div className="placeholder-icon">
                 <img
-                  src="../../public/turntable-svgrepo-com.svg"
+                  src="/turntable-svgrepo-com.svg"
                   alt="Mockup Icon"
                   style={{ width: "48px", marginBottom: "10px" }}
                 />
