@@ -69,18 +69,21 @@ export default function HuggingFaceImageGenerator() {
         <label htmlFor="prompt" className="section-title">
           Describe Your App Vision
         </label>
-        <p>
-          {" "}
+
+        <p style={{ fontSize: "0.9rem", color: "#6b7280", marginTop: "4px" }}>
           Be specific about features, design style, and target users for best
           results
         </p>
+
         <textarea
           id="prompt"
           className="input-box"
           rows={4}
+          placeholder="e.g., Create a modern cooking app with a clean, minimalist design. Include recipe cards, meal planning, shopping list, and cooking timer..."
           value={prompt}
           onChange={(e) => setPrompt(e.target.value)}
         />
+
         <button
           className="generate-btn"
           onClick={handleGenerate}
@@ -88,11 +91,62 @@ export default function HuggingFaceImageGenerator() {
         >
           {loading ? "Generating..." : "⚙️ Generate Mockup"}
         </button>
+
+        <hr style={{ margin: "24px 0", borderTop: "1px solid #e5e7eb" }} />
+
+        <h3 className="example-title">Example Prompts</h3>
+        <div className="example-list">
+          {EXAMPLES.map((text, i) => (
+            <button
+              key={i}
+              className="example-btn"
+              onClick={() => setPrompt(text)}
+            >
+              {text}
+            </button>
+          ))}
+        </div>
       </div>
 
       <div className="card">
         <h2 className="section-title">Generated Mockup</h2>
-        {error && <p className="error-text"> {error}</p>}
+        {error && <p className="error-text">{error}</p>}
+
+        {loading ? (
+          <div className="placeholder-wrapper">
+            <div className="spinner" />
+            <p
+              className="placeholder-text"
+              style={{
+                textAlign: "center",
+                color: "#6b7280",
+                marginTop: "12px",
+              }}
+            >
+              Generating your mockup, please wait...
+            </p>
+          </div>
+        ) : (
+          !imageUrl && (
+            <div className="placeholder-wrapper">
+              <div className="placeholder-icon">
+                <img
+                  src="../../public/turntable-svgrepo-com.svg"
+                  alt="Mockup Icon"
+                  style={{ width: "48px", marginBottom: "10px" }}
+                />
+              </div>
+              <p
+                className="placeholder-text"
+                style={{ textAlign: "center", color: "#6b7280" }}
+              >
+                Enter a detailed description of your app idea and let's create a
+                professional, photorealistic mockup for you.
+              </p>
+            </div>
+          )
+        )}
+
         {imageUrl && (
           <div className="image-wrapper">
             <img src={imageUrl} alt="Generated UI" className="preview" />
@@ -106,21 +160,9 @@ export default function HuggingFaceImageGenerator() {
           </div>
         )}
       </div>
-
-      <div className="card">
-        <h3 className="example-title"> Example Prompts</h3>
-        <div className="example-list">
-          {EXAMPLES.map((text, i) => (
-            <button
-              key={i}
-              className="example-btn"
-              onClick={() => setPrompt(text)}
-            >
-              {text}
-            </button>
-          ))}
-        </div>
-      </div>
+      <footer className="footer">
+        <p>© 2025 Anas Ben Abdallah</p>
+      </footer>
     </div>
   );
 }
